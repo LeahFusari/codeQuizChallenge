@@ -1,7 +1,7 @@
 
 var timeLeft = 75;
 var timerCountdown = 0;
-
+var timeDisplay = document.querySelector("#timer")
 
 // make start quiz button do something
 
@@ -9,9 +9,9 @@ var timerCountdown = 0;
 function startQuiz(){
     var timerCountdown = setInterval(function(){
         console.log(timeLeft);
-        timeLeft--
+        timeLeft--;
+        timeDisplay.textContent = "Time Left: " + timeLeft + " seconds";
             if (timeLeft === 0){
-                console.log("Time is up.");
                 clearInterval(timerCountdown);
             }
     },1000);
