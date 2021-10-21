@@ -1,32 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding Quiz</title>
-</head>
-<body>
-        <header>
-            <h1 id=header-title>Coding Quiz</h1>
-            <span id="timer">Time Left: 75 seconds</span>
-        </header>
-    
-    <div class="main">
-        <section class="game-rules"  id="gameRules">
-            <p>This is a coding quiz...click the Start Quiz button to begin.</p>
-            <p>Try to beat the high score by answering the questions before the timer reaches zero.</p>  
-            <p>If you get a question wrong, you will lose time.</p>
-        </section>
+    <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Coding Quiz</title>
+        </head>
 
-        <button id="startQuiz">Start Quiz</button>
+        <body>
+            <header>
+                <h1 id=header-title>Coding Quiz</h1>
+                <span id="timer">Time Left: 75 seconds</span>
+                <br>
+                <span id="highScore">High Score:</span>
+            </header>
 
+            <div id="main">
+                <section class="game-rules"  id="gameRules">
+                    <p>This is a coding quiz...click the Start Quiz button to begin.
+                    Try to beat the high score by answering the questions before the timer reaches zero.  
+                    If you get a question wrong, you will lose time.</p>
+                </section>
 
-    </div>
+                <button id="startQuiz">Start Quiz</button>
+        
+                <div class="questArea">
+                    <h2 id="qTitle"></h2>
+                    <div id="mChoice"></div>
+                    <div id="result"></div>
+                </div>
 
+                <div id="finalResult">
+                    <div id="finalScore"></div>
+                    <label for="initials">Enter your initials</label>
+                    <input type="text" id="initials">
+                    <button id="btnSubmit">Submit</button>
+                </div>
 
+                <button id="clearHS">Clear High Scores</button>
+                <button id="resetQuiz">Restart</button>
 
-
-    <script src="./assets/script/script.js"></script>
-</body>
+            </div>
+            <script src="./assets/script/script.js"></script>
+        </body>
 </html>
