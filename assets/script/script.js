@@ -1,5 +1,5 @@
 
-var timeLeft = 75;
+var timeLeft = 10;
 var timerCountdown = 0;
 var questionNum = 0;
 var timeDisplay = document.querySelector("#timer")
