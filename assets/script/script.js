@@ -43,8 +43,16 @@ var questions = [
     }
 ];
 
-// make start quiz button do something
 
+// make start quiz button do something
+function startGame(){
+    gameRulesSect.style.display="none"
+    
+    startTimer()
+    displayQuestions()
+
+
+}
 
 function startTimer(){
     var timerCountdown = setInterval(function(){
@@ -57,7 +65,9 @@ function startTimer(){
 };
 
 function displayQuestions(){
+ 
     document.getElementById("qTitle").textContent = questions[index].title
+    
     selections.innerHTML=""
     var button1=document.createElement("button")
         button1.textContent = questions[index].choices[0]
@@ -87,30 +97,34 @@ function displayQuestions(){
             checkNext(button4.textContent,questions[index])
             })
         selections.appendChild(button4)
+
 }
 
 function checkNext(selectedButton){
-
-    if (selectedButton === questions[index].correctAsr) {
+    
+        if (selectedButton === questions[index].correctAsr) {
         answerResult.textContent = "Correct!";
-        console.log(answerResult.textContent);
-    } else{
-        answerResult.textContent = "Wrong!";
-        timeLeft = timeLeft - 10;
+            } else{
+            answerResult.textContent = "Wrong!";
+            timeLeft = timeLeft - 10;             
     }
+        // return
 
     questionNum = index++
-    console.log(questionNum);
-    displayQuestions()
+    console.log(index);
+    console.log(questions.length);
+
+    if(index < questions.length){
+
+        displayQuestions()
+    }else{
+        endGame()
+    }
+   
 }
 
-function startGame(){
-    gameRulesSect.style.display="none"
-    
-    startTimer()
-    displayQuestions()
-
-
+function endGame(){
+    answerResult.textContent = "Game Over"
 }
 
 
