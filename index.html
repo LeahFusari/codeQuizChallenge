@@ -12,7 +12,7 @@
                 <h1 id=header-title>Coding Quiz</h1>
                 <span id="timer">Time Left: 75 seconds</span>
                 <br>
-                <span id="highScore">High Score:</span>
+                <span id="highScore"></span>
             </header>
 
             <div id="main">
@@ -20,25 +20,27 @@
                     <p>This is a coding quiz...click the Start Quiz button to begin.
                     Try to beat the high score by answering the questions before the timer reaches zero.  
                     If you get a question wrong, you will lose time.</p>
+
+                    <button id="startQuiz">Start Quiz</button>
                 </section>
 
-                <button id="startQuiz">Start Quiz</button>
+               
         
-                <div class="questArea">
+                <div id="questArea">
                     <h2 id="qTitle"></h2>
-                    <div id="mChoice"></div>
+                    <div id="choices"></div>
                     <div id="result"></div>
                 </div>
 
                 <div id="finalResult">
                     <div id="finalScore"></div>
-                    <label for="initials">Enter your initials</label>
-                    <input type="text" id="initials">
-                    <button id="btnSubmit">Submit</button>
+                    <label for="initials"></label>
+                    <!-- <input type="text" id="initials"> -->
+                    <!-- <button id="btnSubmit"></button> -->
                 </div>
 
-                <button id="clearHS">Clear High Scores</button>
-                <button id="resetQuiz">Restart</button>
+                <!-- <button id="clearHS"></button>
+                <button id="resetQuiz"></button> -->
 
             </div>
             <script src="./assets/script/script.js"></script>
