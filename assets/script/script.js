@@ -87,8 +87,15 @@ function displayQuestions(){
         selections.appendChild(button4)
 }
 
-function checkNext(){
-
+function checkNext(event){
+    document.getElementById("choices").addEventListener("click",checkNext);
+        console.log(event.target.value);
+    // if (questions[questionNum].correctAsr === target.value) {
+    //     p.textContent = "Correct!";
+    // } else if (questions[questionCount].correctAnswer !== event.target.value) {
+    //     secondsLeft = secondsLeft - 10;
+    //     p.textContent = "Wrong!";
+    // }
     index++
     displayQuestions()
 }
