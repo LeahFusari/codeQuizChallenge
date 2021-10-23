@@ -1,13 +1,14 @@
-
-var timeLeft = 75;
-var timerCountdown = 0;
-var questionNum = 0;
+var inProgress = "False"
+var questionNum = "";
 var index = 0;
-var timeDisplay = document.querySelector("#timer");
+var timeLeft = document.getElementById("timer");
 var gameRulesSect = document.querySelector("#gameRules");
 var questionDisplay = document.querySelector("#questArea");
 var selections = document.querySelector("#choices");
 var answerResult = document.querySelector("#result");
+var yourFinalScore = document.querySelector("#finalScore");
+var player = document.getElementById("player-highscore");
+
 
 
 // Array of objects (questions, choices and correct answers) with a nested array of choices
@@ -47,28 +48,25 @@ var questions = [
 // make start quiz button do something
 function startGame(){
     gameRulesSect.style.display="none"
-    
+    inProgress = true
     startTimer()
     displayQuestions()
-
-
 }
 
 function startTimer(){
-    var timerCountdown = setInterval(function(){
-        timeLeft--;
-        timeDisplay.textContent = "Time Left: " + timeLeft + " seconds";
-            if (timeLeft === 0 || questions === questions.length){
-                clearInterval(timerCountdown);
-            }
-    },1000);
-};
+    timeLeft = 75
+    var countdown = setInterval(function(){
+    timeLeft--;
+    document.getElementById("timer").textContent = "Time Left: " + timeLeft + " seconds";
+    if (timeLeft<=0 || inProgress == false) clearInterval(countdown);},1000);
+    };
 
 function displayQuestions(){
- 
+
     document.getElementById("qTitle").textContent = questions[index].title
     
     selections.innerHTML=""
+
     var button1=document.createElement("button")
         button1.textContent = questions[index].choices[0]
         button1.addEventListener("click", function(){
@@ -102,30 +100,65 @@ function displayQuestions(){
 
 function checkNext(selectedButton){
     
+    answerResult.style.visibility="visible";
+    
         if (selectedButton === questions[index].correctAsr) {
         answerResult.textContent = "Correct!";
+        
             } else{
             answerResult.textContent = "Wrong!";
-            timeLeft = timeLeft - 10;             
-    }
-        // return
-
+            timeLeft = timeLeft - 10;    
+                }
+                
+        setTimeout(wipeResult,500);
     questionNum = index++
-    console.log(index);
-    console.log(questions.length);
-
-    if(index < questions.length){
-
-        displayQuestions()
-    }else{
-        endGame()
-    }
-   
+     
+    if(questionNum === questions.length -1){
+        endGame();
+        }
+        
+    else{
+        displayQuestions();
+        }
+    // console.log(index)
 }
+
+function wipeResult(){
+    document.getElementById("result").style.visibility="hidden";
+} 
 
 function endGame(){
-    answerResult.textContent = "Game Over"
-}
+    inProgress = false;
+    selections.style.visibility="hidden";
+    document.getElementById("qTitle").textContent = "Game Over"
+    yourFinalScore.textContent= "Your final score is " + timeLeft;
+    setTimeout(function(){document.getElementById("timer").style.visibility="hidden"},500);
+    
+    if (localStorage.getItem("highScore")< timeLeft){
+        localStorage.setItem("highScore",timeLeft);
+        document.getElementById("highscore-result").textContent = "You beat the high score!"
+
+        recordPlayerHS()
+    }else
+        document.getElementById("highscore-result").textContent = "You did not beat the high score!  TRY AGAIN!";
+    }
+
+function recordPlayerHS(){
+    var myInputLabel = document.createElement("label")
+        myInputLabel.textContent = "Enter Name"
+        player.appendChild(myInputLabel);
+    
+    var myInput = document.createElement("input")
+            myInput.setAttribute("type","text");
+            player.appendChild(myInput);
+
+    
+
+    }
+    console.log(timeLeft)
+    console.log(yourFinalScore.textContent);
+    console.log(localStorage.getItem("highScore"));
+   
 
 
 
