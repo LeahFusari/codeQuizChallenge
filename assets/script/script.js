@@ -8,6 +8,7 @@ var selections = document.querySelector("#choices");
 var answerResult = document.querySelector("#result");
 var yourFinalScore = document.querySelector("#finalScore");
 var player = document.getElementById("player-highscore");
+var resetClear = document.querySelector("#clear-buttons");
 
 
 
@@ -165,10 +166,28 @@ function getPlayerName(){
 
     function displayChamp(){
         var champ = localStorage.getItem("playerName") + " with a high score of " + localStorage.getItem("highScore")
-        document.getElementById("high-score-final").textContent = "The Champion is " + champ
+            document.getElementById("high-score-final").textContent = "The Champion is " + champ
         
+            displayReset()
     }
    
+function displayReset(){
+    var resetBtn=document.createElement("button")
+            resetBtn.textContent="Play Again"
+            resetBtn.addEventListener("click", function(){
+                location.reload()
+            })
+            resetClear.appendChild(resetBtn)
 
+    var clearScoreBtn=document.createElement("button")
+            clearScoreBtn.textContent="Clear High Score"
+            clearScoreBtn.addEventListener("click", function(){
+                localStorage.removeItem("playerName")
+                localStorage.removeItem("highScore")
+            })
+            resetClear.appendChild(clearScoreBtn)
+            
+                
+}
 
 document.getElementById("startQuiz").addEventListener("click", startGame)
