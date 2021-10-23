@@ -138,12 +138,12 @@ function endGame(){
         localStorage.setItem("highScore",timeLeft);
         document.getElementById("highscore-result").textContent = "You beat the high score!"
 
-        recordPlayerHS()
+        getPlayerName()
     }else
         document.getElementById("highscore-result").textContent = "You did not beat the high score!  TRY AGAIN!";
     }
 
-function recordPlayerHS(){
+function getPlayerName(){
     var myInputLabel = document.createElement("label")
         myInputLabel.textContent = "Enter Name"
         player.appendChild(myInputLabel);
@@ -152,14 +152,23 @@ function recordPlayerHS(){
             myInput.setAttribute("type","text");
             player.appendChild(myInput);
 
-    
-
+    var submitBtn = document.createElement("button")
+        submitBtn.textContent="Submit High Score"
+        submitBtn.addEventListener("click", function(){
+            localStorage.setItem("playerName", myInput.value);
+            document.getElementById("finalResult").style.visibility="hidden"
+            displayChamp()
+        })
+        player.appendChild(submitBtn);
+        
     }
-    console.log(timeLeft)
-    console.log(yourFinalScore.textContent);
-    console.log(localStorage.getItem("highScore"));
-   
 
+    function displayChamp(){
+        var champ = localStorage.getItem("playerName") + " with a high score of " + localStorage.getItem("highScore")
+        document.getElementById("high-score-final").textContent = "The Champion is " + champ
+        
+    }
+   
 
 
 document.getElementById("startQuiz").addEventListener("click", startGame)
