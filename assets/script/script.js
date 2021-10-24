@@ -133,15 +133,17 @@ function endGame(){
     selections.style.visibility="hidden";
     document.getElementById("qTitle").textContent = "Game Over"
     yourFinalScore.textContent= "Your final score is " + timeLeft;
-    setTimeout(function(){document.getElementById("timer").style.visibility="hidden"},500);
+    document.getElementById("timer").style.visibility="hidden";
     
+
     if (localStorage.getItem("highScore")< timeLeft){
         localStorage.setItem("highScore",timeLeft);
         document.getElementById("highscore-result").textContent = "You beat the high score!"
-
+        setTimeout(function(){document.getElementById("qTitle").style.visibility="hidden"},1000);
         getPlayerName()
     }else
         document.getElementById("highscore-result").textContent = "You did not beat the high score!  TRY AGAIN!";
+    
     }
 
 function getPlayerName(){
