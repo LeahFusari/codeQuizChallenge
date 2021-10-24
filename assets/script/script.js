@@ -15,33 +15,33 @@ var resetClear = document.querySelector("#clear-buttons");
 // Array of objects (questions, choices and correct answers) with a nested array of choices
 var questions = [
     {
-        title: "Question 1....",
-        choices: ["choice1", "choice2", "choice3", "choice4"],
-        correctAsr: "choice4"
+        title: "String values must be enclosed within ____ when being assigned to variables.",
+        choices: ["commas", "curly brackets", "quotes", "parenthesis"],
+        correctAsr: "quotes"
     },
 
     {
-        title: "Question 2....",
-        choices: ["choice1", "choice2", "choice3", "choice4"],
-        correctAsr: "choice3"
+        title: "What Characters Contains an Array?",
+        choices: ["< >", "{ }", "[ ]", "# #"],
+        correctAsr: "[ ]"
     },
 
     {
-        title: "Question 3....",
-        choices: ["choice1", "choice2", "choice3", "choice4"],
-        correctAsr: "choice2"
+        title: "!= means what in javascript?",
+        choices: ["Or", "And", "Plus and Equal To", "Not Equal To"],
+        correctAsr: "Not Equal To"
     },
 
     {
-        title: "Question 4....",
-        choices: ["choice1", "choice2", "choice3", "choice4"],
-        correctAsr: "choice1"
+        title: "Which of the following is a valid data type?",
+        choices: ["Boolean", "Number", "String", "All of the above"],
+        correctAsr: "All of the above"
     },
 
     {
-        title: "Question 5....",
-        choices: ["choice1", "choice2", "choice3", "choice4"],
-        correctAsr: "choice2"
+        title: "Which type of pop up box will allow a user to type a response?",
+        choices: ["input", "prompt", "alert", "confirm"],
+        correctAsr: "prompt"
     }
 ];
 
@@ -55,7 +55,7 @@ function startGame(){
 }
 
 function startTimer(){
-    timeLeft = 75
+    timeLeft = 1000
     var countdown = setInterval(function(){
     timeLeft--;
     document.getElementById("timer").textContent = "Time Left: " + timeLeft + " seconds";
@@ -105,23 +105,26 @@ function checkNext(selectedButton){
     
         if (selectedButton === questions[index].correctAsr) {
         answerResult.textContent = "Correct!";
+        answerResult.style.color = "green"
         
             } else{
             answerResult.textContent = "Wrong!";
+            answerResult.style.color = "red"
             timeLeft = timeLeft - 10;    
                 }
                 
         setTimeout(wipeResult,500);
     questionNum = index++
      
-    if(questionNum === questions.length -1){
+    if(questionNum +1 == questions.length){
         endGame();
+        timeLeft = timeLeft + 1
         }
         
     else{
         displayQuestions();
         }
-    // console.log(index)
+    
 }
 
 function wipeResult(){
@@ -131,9 +134,10 @@ function wipeResult(){
 function endGame(){
     inProgress = false;
     selections.style.visibility="hidden";
-    document.getElementById("qTitle").textContent = "Game Over"
+    questionDisplay.style.visibility="hidden";
+    document.getElementById("game-status").textContent = "Game Over"
     yourFinalScore.textContent= "Your final score is " + timeLeft;
-    document.getElementById("timer").style.visibility="hidden";
+    // document.getElementById("timer").style.visibility="hidden";
     
 
     if (localStorage.getItem("highScore")< timeLeft){

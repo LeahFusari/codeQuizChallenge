@@ -15,38 +15,36 @@
             </header>
 
             <div id="time-score-clear">
-                
                 <div id="high-score-final"></div>
                 <div id="clear-buttons"></div>
             </div>
 
+            <div class="game-rules"  id="gameRules">
+                <p>This is a coding quiz...click the Start Quiz button to begin.
+                Try to beat the high score by answering the questions before the timer reaches zero.  
+                If you get a question wrong, you will lose time.</p>
+
+                <button id="startQuiz">Start Quiz</button>
+            </div>
+
             <div id="main">
-                <section class="game-rules"  id="gameRules">
-                    <p>This is a coding quiz...click the Start Quiz button to begin.
-                    Try to beat the high score by answering the questions before the timer reaches zero.  
-                    If you get a question wrong, you will lose time.</p>
 
-                    <button id="startQuiz">Start Quiz</button>
-                </section>
-
-                <div id="questArea">
-                    <h2 id="qTitle"></h2>
-                    <div id="choices"></div>
-                    <div id="result"></div>
-                </div>
+                <div id="game-status"></div>
 
                 <div id="finalResult">
                     <div id="finalScore"></div>
                     <div id="highscore-result"></div>
                     <div id="player-highscore"></div>
-                    <!-- <label for="initials"></label> -->
-                    <!-- <input type="text" id="initials"> -->
+                </div>
+                
+                <div id="questArea">
+                    <h2 id="qTitle"></h2>
+                    <div id="choices"></div>
                 </div>
 
+                <div id="result"></div>
                 
-
-                <!-- <button id="clearHS"></button>
-                <button id="resetQuiz"></button> -->
+               
 
             </div>
             <script src="./assets/script/script.js"></script>
