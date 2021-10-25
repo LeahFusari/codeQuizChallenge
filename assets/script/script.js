@@ -11,8 +11,8 @@ var player = document.getElementById("player-highscore");
 var resetClear = document.querySelector("#clear-buttons");
 var winLose = document.getElementById("highscore-result");
 
-
-
+//event Listener to start game button
+document.getElementById("startQuiz").addEventListener("click", startGame)
 
 // Array of objects (questions, choices and correct answers) with a nested array of choices
 var questions = [
@@ -48,16 +48,16 @@ var questions = [
 ];
 
 
-// make start quiz button do something
+// Game Start Functions
 function startGame(){
     gameRulesSect.style.display="none"
     inProgress = true
     startTimer()
     displayQuestions()
 }
-
+// timer intervals
 function startTimer(){
-    timeLeft = 1000
+    timeLeft = 45
     var countdown = setInterval(function(){
     timeLeft--;
     document.getElementById("timer").textContent = "Time Left: " + timeLeft + " seconds";
@@ -69,6 +69,7 @@ function startTimer(){
     
     };
 
+    // creating answer buttons and listening for click to cycle through questions
 function displayQuestions(){
 
     document.getElementById("qTitle").textContent = questions[index].title
@@ -106,6 +107,7 @@ function displayQuestions(){
 
 }
 
+// checks answer, briefly displays result, then moves to next quesiton or ends game
 function checkNext(selectedButton){
     
     answerResult.style.visibility="visible";
@@ -136,10 +138,12 @@ function checkNext(selectedButton){
                 }
 
 }
-
+// function to clear "correct/wrong"
 function wipeResult(){
     document.getElementById("result").style.visibility="hidden";
 } 
+
+// Game End with set local storage values for high score
 
 function endGame(){
     inProgress = false;
@@ -188,19 +192,17 @@ function getPlayerName(){
         
     }
 
+    // Display high score champion
+
     function displayChamp(){
         var champ = localStorage.getItem("playerName") + " with a high score of " + localStorage.getItem("highScore")
-        
         
             document.getElementById("high-score-final").textContent = "The Champion is " + champ
             displayReset()
 
-            
-
     }
-   
-  
 
+    // reset game to play again and clear local storage of high score buttons
     function displayReset(){
     var resetBtn=document.createElement("button")
             resetBtn.textContent="Play Again"
@@ -221,5 +223,5 @@ function getPlayerName(){
             
                 
 }
-
-document.getElementById("startQuiz").addEventListener("click", startGame)
+// start button event listener
+// document.getElementById("startQuiz").addEventListener("click", startGame)
