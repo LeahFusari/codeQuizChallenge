@@ -1,5 +1,5 @@
 body{
-    background-color: aqua;
+    background-color: #539ca3
 }
 
 header{
@@ -7,13 +7,14 @@ header{
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    background-color: burlywood;
+    background-color: #87dedd;
     top: 0;
-    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    
 }
 #header-title{
     font-size: 45px;
     margin: 0 600px;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 #time-score-clear{
@@ -23,11 +24,12 @@ header{
 
 }
 
-#timer{
+#timer, #score-to-beat, #champion{
     justify-content: center;
     font-size: 20px;
     font-weight: bold;
-    
+    margin: 0 20px;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 #high-score-final{
@@ -74,7 +76,7 @@ margin: 0 300px;
 #result{
     display: flex;
     flex-wrap: wrap;
-    font-size: 20px;
+    font-size: 35px;
     font-weight: bold;
 }
 
@@ -106,4 +108,15 @@ margin: 0 300px;
 #game-status{
     font-size: 45px;
     height: 50px;
+}
+
+#player-highscore input{
+    height: 30px;
+    width: 250px;
+    font-size: 20px;
+    text-align: center;
+}
+
+#highscore-result, #finalScore{
+    padding: 0 10px;
 }

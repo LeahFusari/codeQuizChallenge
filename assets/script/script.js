@@ -9,6 +9,8 @@ var answerResult = document.querySelector("#result");
 var yourFinalScore = document.querySelector("#finalScore");
 var player = document.getElementById("player-highscore");
 var resetClear = document.querySelector("#clear-buttons");
+var winLose = document.getElementById("highscore-result");
+
 
 
 
@@ -59,7 +61,12 @@ function startTimer(){
     var countdown = setInterval(function(){
     timeLeft--;
     document.getElementById("timer").textContent = "Time Left: " + timeLeft + " seconds";
-    if (timeLeft<=0 || inProgress == false) clearInterval(countdown);},1000);
+   
+    if (timeLeft<1 || inProgress == false){
+        clearInterval(countdown);
+    }}
+    ,1000);
+    
     };
 
 function displayQuestions(){
@@ -102,7 +109,7 @@ function displayQuestions(){
 function checkNext(selectedButton){
     
     answerResult.style.visibility="visible";
-    
+
         if (selectedButton === questions[index].correctAsr) {
         answerResult.textContent = "Correct!";
         answerResult.style.color = "green"
@@ -110,21 +117,24 @@ function checkNext(selectedButton){
             } else{
             answerResult.textContent = "Wrong!";
             answerResult.style.color = "red"
-            timeLeft = timeLeft - 10;    
-                }
+            timeLeft = timeLeft - 10;  
+            }
                 
-        setTimeout(wipeResult,500);
-    questionNum = index++
-     
-    if(questionNum +1 == questions.length){
-        endGame();
-        timeLeft = timeLeft + 1
-        }
-        
-    else{
-        displayQuestions();
-        }
-    
+            setTimeout(wipeResult,500);
+            questionNum = index++
+            
+            if(timeLeft < 0){
+                timeLeft = 0
+            }
+
+            if(questionNum + 1 == questions.length || timeLeft < 1 ){
+                endGame();
+                timeLeft = timeLeft + 1
+            }
+            else{
+                displayQuestions();
+                }
+
 }
 
 function wipeResult(){
@@ -136,21 +146,27 @@ function endGame(){
     selections.style.visibility="hidden";
     questionDisplay.style.visibility="hidden";
     document.getElementById("game-status").textContent = "Game Over"
-    yourFinalScore.textContent= "Your final score is " + timeLeft;
-    // document.getElementById("timer").style.visibility="hidden";
     
-
+    
+    
+    yourFinalScore.textContent= "Your final score is " + timeLeft + ".";
+    
     if (localStorage.getItem("highScore")< timeLeft){
+        
         localStorage.setItem("highScore",timeLeft);
         document.getElementById("highscore-result").textContent = "You beat the high score!"
         setTimeout(function(){document.getElementById("qTitle").style.visibility="hidden"},1000);
+
         getPlayerName()
-    }else
+
+    }else {
         document.getElementById("highscore-result").textContent = "You did not beat the high score!  TRY AGAIN!";
-    
+        displayReset()
+        }
     }
 
 function getPlayerName(){
+    
     var myInputLabel = document.createElement("label")
         myInputLabel.textContent = "Enter Name"
         player.appendChild(myInputLabel);
@@ -164,6 +180,8 @@ function getPlayerName(){
         submitBtn.addEventListener("click", function(){
             localStorage.setItem("playerName", myInput.value);
             document.getElementById("finalResult").style.visibility="hidden"
+            document.getElementById("game-status").style.visibility="hidden"
+            
             displayChamp()
         })
         player.appendChild(submitBtn);
@@ -172,16 +190,24 @@ function getPlayerName(){
 
     function displayChamp(){
         var champ = localStorage.getItem("playerName") + " with a high score of " + localStorage.getItem("highScore")
-            document.getElementById("high-score-final").textContent = "The Champion is " + champ
         
+        
+            document.getElementById("high-score-final").textContent = "The Champion is " + champ
             displayReset()
+
+            
+
     }
    
-function displayReset(){
+  
+
+    function displayReset(){
     var resetBtn=document.createElement("button")
             resetBtn.textContent="Play Again"
             resetBtn.addEventListener("click", function(){
                 location.reload()
+                document.getElementById("champion").textContent = "Champion: " + champName
+            document.getElementById("score-to-beat").textContent = "Score to Beat: " + beatScore
             })
             resetClear.appendChild(resetBtn)
 
